@@ -44,6 +44,7 @@ class_4 = np.array([255,75,75])
 class_5 = np.array([125,0,0]) 
 
 
+
 for file in files:
     target_img_path = os.path.join(IMG_PATH,file)
     if(target_img_path.endswith('.png')):
@@ -170,26 +171,7 @@ for file in files:
 
         # plt.imshow(segmented_full)
         # plt.show()
-        brain_final_segement = np.zeros((362,434))
-        regions = regionprops(regions_brain)
-        def sort_by_perimeter(s):
-            return s.perimeter_crofton
-        def sort_by_area(s):
-            return s.area
-        regions = sorted(regions, key=sort_by_area)
-        regions[1:] = sorted(regions[1:], key=sort_by_perimeter)
-        for idx, region in enumerate(regions):
-            # for prop in region:
-            #     print(prop, region[prop])
-            print("Region_label=", region.label)
-            print("Region area=",region.area)
-            print("coords=",region.coords.shape)
-            for i,j in region.coords:
-                brain_final_segement[i][j] = idx+1
-            # plt.imshow(brain_final_segement)
-            # plt.show()
-            # print("num_pixels=",region.num_pixels)
-            print("Perimeter = ",region.perimeter_crofton)
+        
         
         brain_final_segement = np.stack((brain_final_segement,)*3, axis=-1)
 
